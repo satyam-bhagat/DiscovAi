@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DiscovAI Pro — Advanced AI Tools Discovery & Comparison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-navy: #050814;
+      --bg-surface: #0C1226;
+      --bg-card: rgba(16, 23, 48, 0.85);
+      --bg-card-hover: rgba(23, 33, 68, 0.96);
+      --border: rgba(139, 92, 246, 0.24);
+      --border-active: #38BDF8;
+      --text-white: #F8FAFC;
+      --text-muted: #94A3B8;
+      --violet: #7C3AED;
+      --blue: #2563EB;
+      --cyan: #38BDF8;
+      --green: #10B981;
+      --gold: #F59E0B;
+      --grad-main: linear-gradient(135deg, #7C3AED 0%, #2563EB 100%);
+      --grad-text: linear-gradient(135deg, #FFFFFF 15%, #C4B5FD 55%, #38BDF8 100%);
+      --radius-lg: 16px;
+      --radius-md: 11px;
+      --radius-pill: 999px;
+      --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-navy);
+      color: var(--text-white);
+      line-height: 1.55;
+      background-image:
+        radial-gradient(circle at 12% 8%, rgba(124, 58, 237, 0.18) 0%, transparent 38%),
+        radial-gradient(circle at 88% 15%, rgba(37, 99, 235, 0.18) 0%, transparent 40%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, .brand-font { font-family: 'Plus Jakarta Sans', sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font-family: inherit; }
+
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 20px; width: 100%; }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: rgba(5, 8, 20, 0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      gap: 14px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--grad-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 0 18px rgba(124, 58, 237, 0.45);
+    }
+
+    .logo-title {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-tabs { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+    .nav-tab {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 8px 13px;
+      border-radius: var(--radius-pill);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-tab:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .nav-tab.active {
+      color: #fff;
+      background: rgba(124, 58, 237, 0.2);
+      border-color: rgba(124, 58, 237, 0.45);
+    }
+
+    .badge-count {
+      background: var(--blue);
+      color: #fff;
+      font-size: 11px;
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: var(--grad-main);
+      color: #fff;
+      border: none;
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); opacity: 0.94; }
+
+    /* Hero + AI Matchmaker */
+    .hero {
+      padding: 48px 0 28px;
+      text-align: center;
+    }
+
+    .hero-pill {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--cyan);
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 4.5vw, 50px);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -1px;
+      max-width: 820px;
+      margin: 0 auto 14px;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 640px;
+      margin: 0 auto 26px;
+    }
+
+    /* Smart Search / Task Matchmaker */
+    .search-box-wrap {
+      max-width: 720px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-active);
+      border-radius: var(--radius-pill);
+      padding: 6px 6px 6px 20px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 22px rgba(56, 189, 248, 0.16);
+    }
+
+    .search-box-wrap input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .quick-prompts {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .chip {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: #E2E8F0;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      font-size: 12px;
+      transition: var(--transition);
+    }
+
+    .chip:hover { border-color: var(--cyan); color: #fff; }
+
+    /* Filter Bar & Category Pills */
+    .filter-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      margin: 24px 0;
+    }
+
+    .filter-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .select-control {
+      background: var(--bg-navy);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .cat-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cat-pill {
+      background: var(--bg-navy);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 13px;
+      border-radius: var(--radius-pill);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .cat-pill:hover { border-color: var(--cyan); color: #fff; }
+    .cat-pill.active {
+      background: var(--grad-main);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    /* Tools Grid */
+    .stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 18px;
+    }
+
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .tool-card:hover {
+      transform: translateY(-4px);
+      background: var(--bg-card-hover);
+      border-color: var(--border-active);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .tool-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tool-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(37,99,235,0.3));
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      flex-shrink: 0;
+    }
+
+    .tool-title-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rank-tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.14);
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+
+    .tool-title {
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tool-title:hover { color: var(--cyan); }
+
+    .tool-cat { font-size: 12px; color: var(--text-muted); }
+
+    .upvote-btn {
+      background: var(--bg-navy);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 6px 11px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .upvote-btn:hover, .upvote-btn.voted {
+      border-color: var(--cyan);
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--cyan);
+    }
+
+    .tool-desc {
+      color: #CBD5E1;
+      font-size: 13.5px;
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      color: #CBD5E1;
+    }
+
+    .badge-pick { background: rgba(245,158,11,0.16); color: #FBBF24; border: 1px solid rgba(245,158,11,0.35); }
+    .badge-Free { background: rgba(16,185,129,0.16); color: #34D399; }
+    .badge-Freemium { background: rgba(56,189,248,0.15); color: #38BDF8; }
+    .badge-Paid { background: rgba(167,139,250,0.16); color: #C4B5FD; }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .icon-action {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: #CBD5E1;
+      padding: 8px 10px;
+      border-radius: 9px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .icon-action:hover, .icon-action.active {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.14);
+    }
+
+    .btn-details {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 8px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-details:hover { background: rgba(124, 58, 237, 0.25); }
+
+    .btn-visit {
+      flex: 1;
+      background: var(--grad-main);
+      color: #fff;
+      padding: 8px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Views */
+    .view { display: none; animation: fadeIn 0.28s ease; }
+    .view.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Compare Table */
+    .compare-wrap {
+      overflow-x: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      margin-top: 20px;
+    }
+
+    table.compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+
+    .compare-table th, .compare-table td {
+      padding: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    .compare-table th {
+      background: rgba(255,255,255,0.03);
+      color: var(--cyan);
+      width: 180px;
+    }
+
+    /* Form Box */
+    .form-card {
+      max-width: 600px;
+      margin: 28px auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #CBD5E1; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      background: var(--bg-navy);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    /* Modal */
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 4, 12, 0.82);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 120;
+    }
+
+    .modal-bg.open { display: flex; }
+
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-active);
+      border-radius: var(--radius-lg);
+      max-width: 620px;
+      width: 100%;
+      padding: 28px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .pc-box {
+      background: var(--bg-navy);
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+      font-size: 13px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: var(--cyan);
+      color: #050814;
+      font-weight: 700;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+      display: none;
+      z-index: 200;
+    }
+
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 820px) {
+      .filter-controls { grid-template-columns: 1fr 1fr; }
+      .pros-cons { grid-template-columns: 1fr; }
+      .nav-bar { height: auto; padding: 12px 0; flex-wrap: wrap; }
+    }
+    @media (max-width: 540px) {
+      .filter-controls { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav-bar">
+      <div class="logo" onclick="switchTab('discover')">
+        <div class="logo-mark">✦</div>
+        <span class="logo-title">DiscovAI</span>
+      </div>
+
+      <div class="nav-tabs">
+        <button class="nav-tab active" id="tab-discover" onclick="switchTab('discover')">Discover</button>
+        <button class="nav-tab" id="tab-picks" onclick="switchTab('picks')">★ Editor's Picks</button>
+        <button class="nav-tab" id="tab-saved" onclick="switchTab('saved')">
+          Saved <span class="badge-count" id="savedCount">0</span>
+        </button>
+        <button class="nav-tab" id="tab-compare" onclick="switchTab('compare')">
+          Compare <span class="badge-count" id="compareCount">0</span>
+        </button>
+        <button class="btn-primary" onclick="switchTab('submit')">+ Submit Tool</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- DISCOVER & PICKS VIEW -->
+    <section id="view-discover" class="view active">
+      <div class="hero">
+        <div class="hero-pill">✦ Discover. Explore. Experience AI.</div>
+        <h1 id="pageHeading">Find & Compare the Best AI Tools</h1>
+        <p>Describe what you want to build, write, or automate—or filter our ranked directory by category, pricing, and community votes.</p>
+
+        <div class="search-box-wrap">
+          <input type="text" id="smartSearch" placeholder="Try: 'edit video', 'write code', 'research papers', 'ChatGPT'..." oninput="renderTools()" />
+          <button class="btn-primary" onclick="renderTools()">Find AI</button>
+        </div>
+
+        <div class="quick-prompts">
+          <span>Quick tasks:</span>
+          <button class="chip" onclick="setTaskSearch('coding')">💻 Build Software</button>
+          <button class="chip" onclick="setTaskSearch('video')">🎬 Generate Video</button>
+          <button class="chip" onclick="setTaskSearch('research')">🔬 Cite Research</button>
+          <button class="chip" onclick="setTaskSearch('voice')">🎙️ Clone Voice</button>
+          <button class="chip" onclick="setTaskSearch('music')">🎵 Make Music</button>
+        </div>
+      </div>
+
+      <div class="filter-panel">
+        <div class="filter-controls">
+          <select id="priceSelect" class="select-control" onchange="renderTools()">
+            <option value="All">Pricing: All Models</option>
+            <option value="Free">Free Only</option>
+            <option value="Freemium">Freemium</option>
+            <option value="Paid">Paid</option>
+          </select>
+
+          <select id="sortSelect" class="select-control" onchange="renderTools()">
+            <option value="rank">Sort: Top Ranked</option>
+            <option value="upvotes">Sort: Most Upvoted</option>
+            <option value="az">Sort: Alphabetical (A–Z)</option>
+          </select>
+
+          <select id="tagSelect" class="select-control" onchange="renderTools()">
+            <option value="All">Filter: All Tools</option>
+            <option value="picks">Editor's Picks Only</option>
+          </select>
+
+          <button class="chip" style="padding:10px 16px; border-radius:10px;" onclick="resetFilters()">Reset Filters</button>
+        </div>
+
+        <div class="cat-pills" id="categoryPills"></div>
+      </div>
+
+      <div class="stats-bar">
+        <span id="resultsCount">Showing 16 AI tools</span>
+        <span>Tip: Click ⚖️ on any card to compare up to 3 tools side-by-side</span>
+      </div>
+
+      <div class="tools-grid" id="toolsGrid"></div>
+    </section>
+
+    <!-- SAVED STACK VIEW -->
+    <section id="view-saved" class="view">
+      <div style="padding:36px 0 18px;">
+        <h2>🔖 My Saved AI Stack</h2>
+        <p style="color:var(--text-muted); font-size:14px;">Your bookmarked AI tools saved locally in your browser.</p>
+      </div>
+      <div class="tools-grid" id="savedGrid"></div>
+    </section>
+
+    <!-- COMPARE VIEW -->
+    <section id="view-compare" class="view">
+      <div style="padding:36px 0 10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h2>⚖️ Side-by-Side AI Comparison</h2>
+          <p style="color:var(--text-muted); font-size:14px;">Select up to 3 tools using the ⚖️ button on any tool card.</p>
+        </div>
+        <button class="chip" style="padding:8px 14px;" onclick="clearCompare()">Clear Comparison</button>
+      </div>
+      <div id="compareContainer"></div>
+    </section>
+
+    <!-- SUBMIT TOOL VIEW -->
+    <section id="view-submit" class="view">
+      <div class="form-card">
+        <h2 style="margin-bottom:6px;">Submit an AI Tool</h2>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:22px;">Add a new AI tool directly to the live DiscovAI directory.</p>
+        <form onsubmit="submitNewTool(event)">
+          <div class="form-group">
+            <label>Tool Name *</label>
+            <input type="text" id="inName" required placeholder="e.g., Bolt.new" />
+          </div>
+          <div class="form-group">
+            <label>Official Website URL *</label>
+            <input type="url" id="inUrl" required placeholder="https://..." />
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div class="form-group">
+              <label>Category *</label>
+              <select id="inCategory"></select>
+            </div>
+            <div class="form-group">
+              <label>Pricing *</label>
+              <select id="inPricing">
+                <option value="Free">Free</option>
+                <option value="Freemium">Freemium</option>
+                <option value="Paid">Paid</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Best For / Short Tagline *</label>
+            <input type="text" id="inBestFor" required placeholder="e.g., Full-stack web app generation in browser" />
+          </div>
+          <div class="form-group">
+            <label>Description *</label>
+            <textarea id="inDesc" rows="3" required placeholder="Describe key capabilities..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%; padding:13px;">Publish to Directory</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <strong>DiscovAI</strong> — Discover. Explore. Experience AI. • Curated AI Tools Directory & Comparison Engine
+    </div>
+  </footer>
+
+  <!-- DETAIL MODAL -->
+  <div class="modal-bg" id="detailModal" onclick="if(event.target===this) closeModal()">
+    <div class="modal-box" id="modalBody"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const CATEGORIES = [
+      "All", "Chatbots", "Coding", "Image Generation", "Video Generation",
+      "Writing", "Voice", "Music", "Education", "Marketing", "Productivity", "Research"
+    ];
+
+    const DEFAULT_TOOLS = [
+      { id: 1, rank: 1, name: "ChatGPT", icon: "🤖", category: "Chatbots", pricing: "Freemium", upvotes: 642, pick: true, url: "https://chat.openai.com", bestFor: "All-around assistant, coding & reasoning", desc: "OpenAI's flagship conversational model for writing, data analysis, coding, and multimodal voice/vision tasks.", pros: ["Versatile across almost every task", "Strong free tier"], cons: ["Rate limits on advanced reasoning models"] },
+      { id: 2, rank: 2, name: "Claude", icon: "🧠", category: "Chatbots", pricing: "Freemium", upvotes: 618, pick: true, url: "https://claude.ai", bestFor: "Deep coding, long documents & natural prose", desc: "Anthropic's AI assistant featuring large context windows, live interactive Artifacts, and clean code generation.", pros: ["Top-tier coding & refactoring", "Nuanced human-like writing"], cons: ["No native image generation"] },
+      { id: 3, rank: 3, name: "Cursor", icon: "⚡", category: "Coding", pricing: "Freemium", upvotes: 589, pick: true, url: "https://cursor.com", bestFor: "AI-first software engineering", desc: "Code editor built on VS Code that indexes entire repositories, predicts multi-line edits, and writes full features.", pros: ["Understands full project context", "Supports all VS Code extensions"], cons: ["Pro plan needed for heavy agent usage"] },
+      { id: 4, rank: 4, name: "Perplexity", icon: "🔬", category: "Research", pricing: "Freemium", upvotes: 554, pick: true, url: "https://www.perplexity.ai", bestFor: "Real-time cited web research", desc: "AI answer engine that searches live web sources and synthesizes accurate answers with inline citations.", pros: ["Every answer links to real sources", "Fast deep-research mode"], cons: ["Less suited for creative fiction"] },
+      { id: 5, rank: 5, name: "NotebookLM", icon: "📓", category: "Education", pricing: "Free", upvotes: 521, pick: true, url: "https://notebooklm.google.com", bestFor: "Studying PDFs, notes & Audio Overviews", desc: "Google's AI research assistant grounded strictly in your uploaded documents, complete with podcast-style audio summaries.", pros: ["100% free with generous limits", "Zero hallucination outside your sources"], cons: ["Limited to uploaded source material"] },
+      { id: 6, rank: 6, name: "Runway Gen-3", icon: "🎬", category: "Video Generation", pricing: "Freemium", upvotes: 493, pick: true, url: "https://runwayml.com", bestFor: "Cinematic AI video & VFX", desc: "Professional generative video studio offering text-to-video, image-to-video, camera controls, and rotoscoping.", pros: ["High temporal consistency", "Full web video editor included"], cons: ["Credits deplete quickly on 4K renders"] },
+      { id: 7, rank: 7, name: "Midjourney", icon: "🎨", category: "Image Generation", pricing: "Paid", upvotes: 478, pick: true, url: "https://www.midjourney.com", bestFor: "Photorealistic & artistic visuals", desc: "Industry-leading generative image studio renowned for lighting, composition, and consistent character styling.", pros: ["Unmatched aesthetic quality", "Powerful web editor & style references"], cons: ["No free trial tier"] },
+      { id: 8, rank: 8, name: "ElevenLabs", icon: "🎙️", category: "Voice", pricing: "Freemium", upvotes: 452, pick: true, url: "https://elevenlabs.io", bestFor: "Lifelike voiceovers & voice cloning", desc: "Ultra-realistic AI speech synthesis, instant voice cloning, and automated multilingual video dubbing.", pros: ["Most realistic vocal emotion", "Low-latency developer API"], cons: ["Character limits on free plan"] },
+      { id: 9, rank: 9, name: "Suno", icon: "🎵", category: "Music", pricing: "Freemium", upvotes: 430, pick: true, url: "https://suno.com", bestFor: "Full songs with vocals & lyrics", desc: "Generative music studio that creates complete radio-ready songs with vocals and instrumentation from a text prompt.", pros: ["Daily free credits", "Catchy melodies and custom lyrics"], cons: ["Limited multi-track DAW export"] },
+      { id: 10, rank: 10, name: "GitHub Copilot", icon: "🐙", category: "Coding", pricing: "Freemium", upvotes: 411, pick: false, url: "https://github.com/features/copilot", bestFor: "Inline IDE autocomplete & PR reviews", desc: "AI pair programmer integrated into VS Code, JetBrains, and GitHub for real-time code suggestions and chat.", pros: ["Free tier available for everyone", "Deep GitHub workflow integration"], cons: ["Less autonomous than Cursor Composer"] },
+      { id: 11, rank: 11, name: "Jasper", icon: "📈", category: "Marketing", pricing: "Paid", upvotes: 365, pick: false, url: "https://www.jasper.ai", bestFor: "Brand-consistent marketing campaigns", desc: "Enterprise marketing AI platform tailored for ad copy, SEO blog posts, and unified brand voice guidelines.", pros: ["Built specifically for marketing teams", "Multi-channel campaign templates"], cons: ["Premium pricing"] },
+      { id: 12, rank: 12, name: "Notion AI", icon: "⚡", category: "Productivity", pricing: "Paid", upvotes: 350, pick: false, url: "https://www.notion.so/product/ai", bestFor: "Workspace Q&A & meeting summaries", desc: "Built-in workspace intelligence that searches across your team's docs, wikis, and databases to draft and summarize.", pros: ["Seamless inside Notion docs", "Answers questions from company wiki"], cons: ["Requires paid add-on"] },
+      { id: 13, rank: 13, name: "Consensus", icon: "📚", category: "Research", pricing: "Freemium", upvotes: 334, pick: false, url: "https://consensus.app", bestFor: "Peer-reviewed scientific paper search", desc: "Academic AI search engine that extracts and synthesizes evidence directly from millions of scientific studies.", pros: ["Consensus Meter shows study agreement", "Direct DOI citations"], cons: ["Focused strictly on academic literature"] },
+      { id: 14, rank: 14, name: "Gamma", icon: "📊", category: "Productivity", pricing: "Freemium", upvotes: 319, pick: true, url: "https://gamma.app", bestFor: "Instant slide decks & presentations", desc: "AI presentation generator that transforms outlines or documents into polished, interactive slide decks in seconds.", pros: ["Saves hours of slide formatting", "Exports to PowerPoint & PDF"], cons: ["Custom branding requires Pro"] },
+      { id: 15, rank: 15, name: "Grammarly", icon: "✍️", category: "Writing", pricing: "Freemium", upvotes: 302, pick: false, url: "https://www.grammarly.com", bestFor: "Real-time grammar & tone rewriting", desc: "Cross-platform AI writing assistant that refines clarity, tone, and grammar across emails, docs, and browsers.", pros: ["Works everywhere you type", "Instant tone adjustments"], cons: ["Best rewrite features require Premium"] },
+      { id: 16, rank: 16, name: "Khanmigo", icon: "🎓", category: "Education", pricing: "Free", upvotes: 289, pick: false, url: "https://www.khanmigo.ai", bestFor: "Guided Socratic tutoring", desc: "Khan Academy's AI tutor that guides students step-by-step through math, science, and humanities without giving away answers.", pros: ["Free for teachers & accessible for learners", "Safe educational guardrails"], cons: ["Focused on K-12 & intro college subjects"] }
+    ];
+
+    let tools = JSON.parse(localStorage.getItem("discovai_tools")) || DEFAULT_TOOLS;
+    let votedIds = new Set(JSON.parse(localStorage.getItem("discovai_votes")) || []);
+    let savedIds = new Set(JSON.parse(localStorage.getItem("discovai_saved")) || []);
+    let compareIds = JSON.parse(localStorage.getItem("discovai_compare")) || [];
+    let selectedCategory = "All";
+
+    function saveState() {
+      localStorage.setItem("discovai_tools", JSON.stringify(tools));
+      localStorage.setItem("discovai_votes", JSON.stringify([...votedIds]));
+      localStorage.setItem("discovai_saved", JSON.stringify([...savedIds]));
+      localStorage.setItem("discovai_compare", JSON.stringify(compareIds));
+      updateCounters();
+    }
+
+    function updateCounters() {
+      document.getElementById("savedCount").textContent = savedIds.size;
+      document.getElementById("compareCount").textContent = compareIds.length;
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.style.display = "block";
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => el.style.display = "none", 2600);
+    }
+
+    function initSelectors() {
+      const catWrap = document.getElementById("categoryPills");
+      catWrap.innerHTML = CATEGORIES.map(c => `
+        <button class="cat-pill ${selectedCategory === c ? 'active' : ''}" onclick="selectCategory('${c}')">${c}</button>
+      `).join("");
+
+      const inCat = document.getElementById("inCategory");
+      inCat.innerHTML = CATEGORIES.filter(c => c !== "All").map(c => `<option value="${c}">${c}</option>`).join("");
+    }
+
+    function selectCategory(cat) {
+      selectedCategory = cat;
+      initSelectors();
+      renderTools();
+    }
+
+    function setTaskSearch(keyword) {
+      document.getElementById("smartSearch").value = keyword;
+      renderTools();
+    }
+
+    function resetFilters() {
+      selectedCategory = "All";
+      document.getElementById("smartSearch").value = "";
+      document.getElementById("priceSelect").value = "All";
+      document.getElementById("sortSelect").value = "rank";
+      document.getElementById("tagSelect").value = "All";
+      initSelectors();
+      renderTools();
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll(".nav-tab").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+
+      if (tab === "picks") {
+        document.getElementById("tab-picks").classList.add("active");
+        document.getElementById("view-discover").classList.add("active");
+        document.getElementById("tagSelect").value = "picks";
+        document.getElementById("pageHeading").textContent = "★ Editor's Top AI Picks";
+        renderTools();
+      } else if (tab === "discover") {
+        document.getElementById("tab-discover").classList.add("active");
+        document.getElementById("view-discover").classList.add("active");
+        document.getElementById("tagSelect").value = "All";
+        document.getElementById("pageHeading").textContent = "Find & Compare the Best AI Tools";
+        renderTools();
+      } else if (tab === "saved") {
+        document.getElementById("tab-saved").classList.add("active");
+        document.getElementById("view-saved").classList.add("active");
+        renderSaved();
+      } else if (tab === "compare") {
+        document.getElementById("tab-compare").classList.add("active");
+        document.getElementById("view-compare").classList.add("active");
+        renderCompare();
+      } else if (tab === "submit") {
+        document.getElementById("view-submit").classList.add("active");
+      }
+    }
+
+    function toggleVote(id) {
+      const t = tools.find(x => x.id === id);
+      if (!t) return;
+      if (votedIds.has(id)) {
+        votedIds.delete(id);
+        t.upvotes--;
+      } else {
+        votedIds.add(id);
+        t.upvotes++;
+        showToast(`Upvoted ${t.name}!`);
+      }
+      saveState();
+      renderTools();
+      if (document.getElementById("view-saved").classList.contains("active")) renderSaved();
+    }
+
+    function toggleSave(id) {
+      const t = tools.find(x => x.id === id);
+      if (!t) return;
+      if (savedIds.has(id)) {
+        savedIds.delete(id);
+        showToast(`Removed ${t.name} from Saved`);
+      } else {
+        savedIds.add(id);
+        showToast(`Saved ${t.name} to My Stack`);
+      }
+      saveState();
+      renderTools();
+      if (document.getElementById("view-saved").classList.contains("active")) renderSaved();
+    }
+
+    function toggleCompare(id) {
+      const t = tools.find(x => x.id === id);
+      if (!t) return;
+      if (compareIds.includes(id)) {
+        compareIds = compareIds.filter(x => x !== id);
+        showToast(`Removed ${t.name} from Compare`);
+      } else {
+        if (compareIds.length >= 3) {
+          showToast("You can compare up to 3 tools at once.");
+          return;
+        }
+        compareIds.push(id);
+        showToast(`Added ${t.name} to Compare (${compareIds.length}/3)`);
+      }
+      saveState();
+      renderTools();
+    }
+
+    function clearCompare() {
+      compareIds = [];
+      saveState();
+      renderCompare();
+      renderTools();
+    }
+
+    function createCardHTML(t) {
+      const isVoted = votedIds.has(t.id);
+      const isSaved = savedIds.has(t.id);
+      const isCompared = compareIds.includes(t.id);
+      return `
+        <div class="tool-card">
+          <div>
+            <div class="card-header">
+              <div class="tool-meta">
+                <div class="tool-icon">${t.icon || "✨"}</div>
+                <div>
+                  <div class="tool-title-row">
+                    <span class="rank-tag">#${t.rank}</span>
+                    <span class="tool-title" onclick="openModal(${t.id})">${t.name}</span>
+                  </div>
+                  <div class="tool-cat">${t.category}</div>
+                </div>
+              </div>
+              <button class="upvote-btn ${isVoted ? 'voted' : ''}" onclick="toggleVote(${t.id})">▲ ${t.upvotes}</button>
+            </div>
+
+            <p class="tool-desc">${t.desc}</p>
+
+            <div class="badges-row">
+              ${t.pick ? `<span class="badge badge-pick">★ Pick</span>` : ''}
+              <span class="badge badge-${t.pricing}">${t.pricing}</span>
+              <span class="badge">${t.bestFor}</span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button class="icon-action ${isSaved ? 'active' : ''}" title="Save to Stack" onclick="toggleSave(${t.id})">${isSaved ? '🔖' : '📑'}</button>
+            <button class="icon-action ${isCompared ? 'active' : ''}" title="Compare Tool" onclick="toggleCompare(${t.id})">⚖️</button>
+            <button class="btn-details" onclick="openModal(${t.id})">Details</button>
+            <a href="${t.url}" target="_blank" rel="noopener noreferrer" class="btn-visit">Visit ↗</a>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTools() {
+      const query = document.getElementById("smartSearch").value.toLowerCase().trim();
+      const price = document.getElementById("priceSelect").value;
+      const sort = document.getElementById("sortSelect").value;
+      const tagFilter = document.getElementById("tagSelect").value;
+
+      let filtered = tools.filter(t => {
+        const matchCat = selectedCategory === "All" || t.category === selectedCategory;
+        const matchPrice = price === "All" || t.pricing === price;
+        const matchPick = tagFilter !== "picks" || t.pick;
+        const matchQuery = !query ||
+          t.name.toLowerCase().includes(query) ||
+          t.desc.toLowerCase().includes(query) ||
+          t.category.toLowerCase().includes(query) ||
+          (t.bestFor && t.bestFor.toLowerCase().includes(query));
+        return matchCat && matchPrice && matchPick && matchQuery;
+      });
+
+      if (sort === "upvotes") filtered.sort((a, b) => b.upvotes - a.upvotes);
+      else if (sort === "az") filtered.sort((a, b) => a.name.localeCompare(b.name));
+      else filtered.sort((a, b) => a.rank - b.rank);
+
+      document.getElementById("resultsCount").textContent = `Showing ${filtered.length} AI tool${filtered.length === 1 ? '' : 's'}`;
+      const grid = document.getElementById("toolsGrid");
+      grid.innerHTML = filtered.length
+        ? filtered.map(createCardHTML).join("")
+        : `<p style="color:var(--text-muted); grid-column:1/-1; text-align:center; padding:36px;">No AI tools matched your search. Try resetting filters.</p>`;
+    }
+
+    function renderSaved() {
+      const savedList = tools.filter(t => savedIds.has(t.id));
+      const grid = document.getElementById("savedGrid");
+      grid.innerHTML = savedList.length
+        ? savedList.map(createCardHTML).join("")
+        : `<p style="color:var(--text-muted); grid-column:1/-1; text-align:center; padding:40px;">No saved tools yet. Click the 📑 bookmark icon on any tool card to build your stack.</p>`;
+    }
+
+    function renderCompare() {
+      const wrap = document.getElementById("compareContainer");
+      const list = compareIds.map(id => tools.find(t => t.id === id)).filter(Boolean);
+      if (!list.length) {
+        wrap.innerHTML = `<div class="filter-panel" style="text-align:center; padding:42px; color:var(--text-muted);">No tools selected for comparison. Click ⚖️ on up to 3 tool cards in the Discover tab.</div>`;
+        return;
+      }
+
+      wrap.innerHTML = `
+        <div class="compare-wrap">
+          <table class="compare-table">
+            <tr>
+              <th>Tool</th>
+              ${list.map(t => `<td><strong style="font-size:17px;">${t.icon} ${t.name}</strong></td>`).join("")}
+            </tr>
+            <tr>
+              <th>Category</th>
+              ${list.map(t => `<td>${t.category}</td>`).join("")}
+            </tr>
+            <tr>
+              <th>Pricing</th>
+              ${list.map(t => `<td><span class="badge badge-${t.pricing}">${t.pricing}</span></td>`).join("")}
+            </tr>
+            <tr>
+              <th>Best For</th>
+              ${list.map(t => `<td>${t.bestFor}</td>`).join("")}
+            </tr>
+            <tr>
+              <th>Community Votes</th>
+              ${list.map(t => `<td>▲ ${t.upvotes} upvotes</td>`).join("")}
+            </tr>
+            <tr>
+              <th>Overview</th>
+              ${list.map(t => `<td style="color:#CBD5E1;">${t.desc}</td>`).join("")}
+            </tr>
+            <tr>
+              <th>Action</th>
+              ${list.map(t => `<td><a href="${t.url}" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block;">Open Website ↗</a></td>`).join("")}
+            </tr>
+          </table>
+        </div>
+      `;
+    }
+
+    function openModal(id) {
+      const t = tools.find(x => x.id === id);
+      if (!t) return;
+      document.getElementById("modalBody").innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="tool-icon" style="width:52px; height:52px; font-size:26px;">${t.icon || "✨"}</div>
+            <div>
+              <h2 style="font-size:22px;">#${t.rank} ${t.name}</h2>
+              <span style="color:var(--cyan); font-size:13px; font-weight:600;">${t.category} • ${t.pricing}</span>
+            </div>
+          </div>
+          <button onclick="closeModal()" style="background:none; border:none; color:#94A3B8; font-size:22px; cursor:pointer;">✕</button>
+        </div>
+
+        <p style="color:#E2E8F0; font-size:15px; margin-bottom:14px;">${t.desc}</p>
+        <div class="badge" style="margin-bottom:16px; display:inline-block;">Best for: ${t.bestFor}</div>
+
+        <div class="pros-cons">
+          <div class="pc-box">
+            <strong style="color:#34D399; display:block; margin-bottom:6px;">✓ Pros</strong>
+            <ul style="padding-left:16px; color:#CBD5E1;">${(t.pros || ["Fast & intuitive interface"]).map(p => `<li>${p}</li>`).join("")}</ul>
+          </div>
+          <div class="pc-box">
+            <strong style="color:#F87171; display:block; margin-bottom:6px;">✕ Considerations</strong>
+            <ul style="padding-left:16px; color:#CBD5E1;">${(t.cons || ["Free tier may have usage caps"]).map(c => `<li>${c}</li>`).join("")}</ul>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:18px;">
+          <a href="${t.url}" target="_blank" rel="noopener noreferrer" class="btn-primary" style="flex:1; text-align:center; padding:12px;">Visit Official Website ↗</a>
+          <button class="btn-details" style="max-width:120px;" onclick="closeModal()">Close</button>
+        </div>
+      `;
+      document.getElementById("detailModal").classList.add("open");
+    }
+
+    function closeModal() {
+      document.getElementById("detailModal").classList.remove("open");
+    }
+
+    function submitNewTool(e) {
+      e.preventDefault();
+      const newTool = {
+        id: Date.now(),
+        rank: tools.length + 1,
+        name: document.getElementById("inName").value.trim(),
+        icon: "🚀",
+        category: document.getElementById("inCategory").value,
+        pricing: document.getElementById("inPricing").value,
+        upvotes: 1,
+        pick: false,
+        url: document.getElementById("inUrl").value.trim(),
+        bestFor: document.getElementById("inBestFor").value.trim(),
+        desc: document.getElementById("inDesc").value.trim(),
+        pros: ["Newly submitted community tool"],
+        cons: ["Pending full editorial review"]
+      };
+      tools.unshift(newTool);
+      saveState();
+      e.target.reset();
+      showToast(`${newTool.name} added to DiscovAI!`);
+      switchTab("discover");
+    }
+
+    initSelectors();
+    updateCounters();
+    renderTools();
+  </script>
+</body>
+</html>
